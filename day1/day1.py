@@ -1,7 +1,7 @@
 import re
 
 # Python code to read from 'input.txt'
-file_path = 'test.txt'
+file_path = 'input.txt'
 
 input = []
 
@@ -73,46 +73,30 @@ def part2Naive():
 
     sum = 0
 
-    print(values)
-
     for (x, y) in values:
         sum += int(x + y)
 
-    print(sum)
+    return sum
 
-part2Naive()
+print(part2Naive())
 
-# # not totally accurate
-# def find_first_last_digit_with_word(s):
-#     first, last = None, None
-#     word = ""
-#     for char in s:
-#         # Append character to the word
-#         word += char
-#
-#         print(word)
-#
-#         # Check if the word is a digit or in num_strs
-#         if word.isdigit() or word in num_strs:
-#             # Convert word to digit if it's in num_strs
-#             digit = num_strs.get(word, word)
-#
-#             # Update first and last numbers
-#             if first is None:
-#                 first = digit
-#             last = digit
-#
-#             # Reset the word
-#             word = ""
-#
-#     print(first, last)
-#
-#     return first, last
-#
-#
-# def part2Improved():
-#     values = [find_first_last_digit_with_word(line) for line in input]
-#     print(values)
-#     return sum(int(x + y) for (x, y) in values if x and y)
-#
-# print(part2Improved(), 'part 2 improv')
+def part_2_helper(line):
+    f, l = None, None
+    for i, c in enumerate(line):
+        if c.isdigit():
+            l = c
+            if f == None:
+                f = c
+        for val in num_strs.keys():
+            if line[i:].startswith(val):
+                digit = num_strs[val]
+                l = digit
+                if f is None:
+                    f = digit
+    return f, l
+
+def part2Improved():
+    values = [part_2_helper(line) for line in input]    
+    return sum(int(x + y) for (x, y) in values if x and y)
+
+print(part2Improved())
