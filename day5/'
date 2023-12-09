@@ -1,0 +1,30 @@
+file_path = 'test.txt'
+
+maps = {}
+
+order = ["ss", "sf", "fw", 'wl', 'lt', 'th', 'hl']
+
+with open(file_path, 'r') as file:
+    input = file.read().strip().split('\n\n')
+    seeds = {x for x in input[0].split(": ")[1].split(" ")}
+    input = input[1:]
+    input = [x.split("\n") for x in input]
+    print(input, seeds)
+    for i, line in enumerate(input):
+        ranges = line[1:]
+        maps[order[i]] = ranges
+    print(maps)
+    for curr in order:
+
+
+# source -> dest category
+# dest range start, source range start, range len
+# 50 98 2
+# source range starts at 98, and has len of 2; dest range is same len, but starts at 50
+# seed #98 corresponds to soil #50, and seed #99 -> soil #51
+
+# function to take the input map and make it into a dict
+# if the value is not in the dict, then it is just the value itself
+
+# you start at a seed, and you try to get to a location and you need to run it through map after map
+
