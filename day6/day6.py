@@ -26,9 +26,9 @@ def part2():
     time, distance = [int("".join(w for w in l)) for l in [x.split()[1:] for x in input]]
 
     winning_combos = 0
-    for tick in range(1, time + 1):
+    for tick in range(1, (time + 1) // 2):
         if ((time - tick) * tick) > distance:
-            winning_combos += 1
+            winning_combos += 2
     return winning_combos
 
 print(part2())
