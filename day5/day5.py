@@ -2,43 +2,39 @@ file_path = 'test.txt'
 
 location = float('inf')
 
+input = []
+
 # the insight is that you only need to store the ranges, and not the values themselves
 with open(file_path, 'r') as file:
-    seeds, *blocks = file.read().strip().split('\n\n')
-    seeds = list(map(int, seeds.split(": ")[1].split()))
+   input = file.read().strip().split('\n\n')
 
-    seed_tuples = []
-
-    for val in range(0, len(seeds), 2):
-        seed_tuples.append((seeds[val], seeds[val] + seeds[val + 1]))
-
-    print(seed_tuples)
+# you have an array of seeds, and then you need to apply a collections of transformations on these seeds
+def part1():
+    # you want seeds to be an arr of numbers
+    seeds = list(map(int, input[0].split(": ")[1].split()))
+    blocks = input[1:]
 
     for block in blocks:
-        # ranges you want to check against
         ranges = []
-        
         for line in block.splitlines()[1:]:
-            ranges.append(list(map(int, line.split())))
-
+            x = list(map(int, line.split()))
+            ranges.append(x)
+        
         new = []
-
-        while len(seed_tuples) > 0:
-            s, e = seed_tuples.pop()
-            print('start', s, 'end', e)
+        
+        # apply the transformations to the seed
+        for seed in seeds:
             for a, b, c in ranges:
-                os = max(s, b)
-                oe = min(e, b + c)
-                if os < oe:
-                    new.append((os + a - b, oe + a - b))
-                    if os > s:
-                        seed_tuples.append((s, os))
-                    if e > oe:
-                        seed_tuples.append((oe, e))
+                if b <= seed < b + c:
+                    new.append(seed + a - b)
                     break
+            # only runs if we do not break
             else:
-                new.append((s, e))
+                new.append(seed)
+        
+        # seeds are now equal to their transformed values
+        seeds = new
 
-        seed_tuples = new
-    
-    print(sorted(seed_tuples),  'the tuples are')
+    return min(seeds)
+
+print(part1())
