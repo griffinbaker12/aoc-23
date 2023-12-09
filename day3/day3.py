@@ -99,16 +99,6 @@ def part2():
                     visited[y][word_scan_x] = True
                     curr_part_num += input[y][word_scan_x]
 
-                    # print(curr_part_num)
-                    # surrounded_by_sym = is_surrounded_by_symbol(y, word_scan_x, input) 
-                    # if surrounded_by_sym:
-                    #     has_seen_symbol = True
-                    
-                    # go through each, and see if the digit is adjacent to a part, if so, track the coord of that gear
-                    # you want it to return all of the gears that this is adjacent to
-                    # if it is adjacent to 2, then it is valid
-
-                    # add all of the adj. gears to this set
                     get_adj_gears(y, word_scan_x, input, adj_gears)
 
                     word_scan_x += 1
