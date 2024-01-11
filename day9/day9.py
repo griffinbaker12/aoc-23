@@ -8,12 +8,7 @@ with open(file_path, 'r') as file:
         input.append([int(x) for x in line.split()])
 
 def are_all_zeros(arr):
-    all_zeros = True
-    for x in arr:
-        if x is not 0:
-            all_zeros = False
-            break
-    return all_zeros
+    return all(x == 0 for x in arr)
 
 final_numbers = []
 for row in input:
@@ -21,7 +16,6 @@ for row in input:
     diff_arr = [arr]
     while True: 
         int_arr = []
-        print(arr, 'the arr')
         for i, number in enumerate(arr):
             if i == len(arr) - 1:
                 break   
@@ -38,10 +32,7 @@ for row in input:
     for i, diff in enumerate(diff_arr):
         if i == len(diff_arr) - 1:
             break
-        print(diff)
         acc = diff_arr[i+1][0] - acc
-        print(acc, 'the acc is')
     final_numbers.append(acc)
 print(sum(final_numbers))
 
-# take the diff of the rows until the final row is all 0s, if there is a non-zero, then you need to do this again
